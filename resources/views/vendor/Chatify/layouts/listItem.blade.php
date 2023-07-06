@@ -47,13 +47,14 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
                 : ''
             !!}
             {{-- Last message body --}}
-            @if($lastMessage->attachment == null)
-            {!!
-                $lastMessageBody
-            !!}
-            @else
+            @if ($lastMessage->attachment != null)
             <span class="fas fa-file"></span> Attachment
+            @elseif ($lastMessage->offerName != null)
+            <span class="fas fa-file"></span> OFFER
+            @else
+            {!! $lastMessageBody !!}
             @endif
+        
         </span>
         {{-- New messages counter --}}
             {!! $unseenCounter > 0 ? "<b>".$unseenCounter."</b>" : '' !!}
